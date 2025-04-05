@@ -329,6 +329,9 @@ ig.module("nax-ccuilib.ui.quick-menu.quick-menu-extension")
 				focusedButton = undefined;
 				sc.QuickRingMenu.instance.infoBar.setText("");
 			},
+			canPlayFocusSounds() {
+				return !!getWidgetFromId(this.ringId);
+			},
 			updateDrawables(renderer) {
 				const widget = getWidgetFromId(this.ringId);
 				if (!widget) return;

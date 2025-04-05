@@ -19,7 +19,7 @@ importers:
         version: 6.0.2
       ccmodmanager:
         specifier: github:CCDirectLink/CCModManager
-        version: https://codeload.github.com/CCDirectLink/CCModManager/tar.gz/d06889a833f2b4e3d9956c936f28357a7bf5ce3d
+        version: https://codeload.github.com/CCDirectLink/CCModManager/tar.gz/51581da969149f1a77160dd7148bc2a058f344e2
       copyfiles:
         specifier: ^2.4.1
         version: 2.4.1
@@ -375,8 +375,8 @@ packages:
     resolution: {integrity: sha512-P8BjAsXvZS+VIDUI11hHCQEv74YT67YUi5JJFNWIqL235sBmjX4+qx9Muvls5ivyNENctx46xQLQ3aTuE7ssaQ==}
     engines: {node: '>=6'}
 
-  ccmodmanager@https://codeload.github.com/CCDirectLink/CCModManager/tar.gz/d06889a833f2b4e3d9956c936f28357a7bf5ce3d:
-    resolution: {tarball: https://codeload.github.com/CCDirectLink/CCModManager/tar.gz/d06889a833f2b4e3d9956c936f28357a7bf5ce3d}
+  ccmodmanager@https://codeload.github.com/CCDirectLink/CCModManager/tar.gz/51581da969149f1a77160dd7148bc2a058f344e2:
+    resolution: {tarball: https://codeload.github.com/CCDirectLink/CCModManager/tar.gz/51581da969149f1a77160dd7148bc2a058f344e2}
     version: 0.9.21
 
   chalk@4.1.2:
@@ -1278,7 +1278,7 @@ snapshots:
 
   callsites@3.1.0: {}
 
-  ccmodmanager@https://codeload.github.com/CCDirectLink/CCModManager/tar.gz/d06889a833f2b4e3d9956c936f28357a7bf5ce3d: {}
+  ccmodmanager@https://codeload.github.com/CCDirectLink/CCModManager/tar.gz/51581da969149f1a77160dd7148bc2a058f344e2: {}
 
   chalk@4.1.2:
     dependencies:
