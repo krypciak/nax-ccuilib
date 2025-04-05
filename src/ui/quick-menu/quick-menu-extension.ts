@@ -299,13 +299,15 @@ ig.module("nax-ccuilib.ui.quick-menu.quick-menu-extension")
 				return (this.toggledCache ??= nax.ccuilib.QuickRingMenuWidgets.isWidgetToggledOn(getWidgetFromId(this.ringId).name));
 			},
 			invokeButtonPress() {
+				const widget = getWidgetFromId(this.ringId);
+				if (!widget) return;
 				/* Update the state in case a default widget that uses that variable was just swapped */
-				this.state = getWidgetFromId(this.ringId).id ?? 0;
+				this.state = widget.id ?? 0;
 
 				ig.FocusGui.prototype.invokeButtonPress.call(this);
 				if (this.isAToggle) {
 					const newConf = { ...Opts.buttonPressStatus };
-					newConf[getWidgetFromId(this.ringId).name] = this.toggledCache = !this.isToggleOn();
+					newConf[widget.name] = this.toggledCache = !this.isToggleOn();
 					Opts.buttonPressStatus = newConf;
 
 					/* Reset all toggle cache on all buttons to prevent multiple of the same button cache states desyncing */
