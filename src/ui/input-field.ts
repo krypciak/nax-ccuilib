@@ -148,12 +148,7 @@ ig.module("nax-ccuilib.ui.input-field")
 
 						let text = this.getValueAsString();
 						if (text !== old) {
-							// Update the text of the child element
-							if (this.obscure) {
-								this.textChild.setText(this.obscureChar.repeat(this.value.length));
-							} else {
-								this.textChild.setText(text);
-							}
+							this.setTextChildText(text);
 
 							if (this.onCharacterInput) {
 								this.onCharacterInput(text, event.key);
@@ -166,6 +161,21 @@ ig.module("nax-ccuilib.ui.input-field")
 					}
 				}
 
+				this.cursor.hook.pos.x = this.calculateCursorPos();
+			},
+
+			setTextChildText(text: string) {
+				if (this.obscure) {
+					this.textChild.setText(this.obscureChar.repeat(this.value.length));
+				} else {
+					this.textChild.setText(text);
+				}
+			},
+
+			setText(text: string) {
+				this.setTextChildText(text);
+				this.value = text.split("");
+				this.cursorPos = text.length;
 				this.cursor.hook.pos.x = this.calculateCursorPos();
 			},
 
@@ -185,12 +195,7 @@ ig.module("nax-ccuilib.ui.input-field")
 
 			setObscure(obscure) {
 				this.obscure = obscure;
-				let text = this.getValueAsString();
-				if (this.obscure) {
-					this.textChild.setText(this.obscureChar.repeat(this.value.length));
-				} else {
-					this.textChild.setText(text);
-				}
+				this.setTextChildText(this.getValueAsString());
 			},
 
 			// Liberated from ButtonGui

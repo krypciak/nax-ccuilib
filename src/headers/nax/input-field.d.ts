@@ -29,6 +29,8 @@ declare global {
 				calculateCursorPos(this: this): number;
 				getValueAsString(this: this): string;
 				processInput(this: this, event: KeyboardEvent): void;
+				setTextChildText(this: this, text: string): void;
+				setText(this: this, text: string): void;
 				unsetFocus(this: this): void;
 				updateCursorPos(this: this, delta: number): void;
 				setObscure(this: this, obscure: boolean): void;
