@@ -6,7 +6,7 @@ rm -rf "$BASE_NAME"*
 pnpm install
 pnpm run build
 mkdir -p pack
-cp -rf icon LICENSE plugin.js ./pack
+cp -rf LICENSE plugin.js ./pack
 [ -d ./assets ] && cp -r assets ./pack
 [ -d ./lang ] && cp -r lang ./pack
 
