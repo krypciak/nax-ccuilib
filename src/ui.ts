@@ -12,3 +12,5 @@ nax.ccuilib.registerSubMenu = function (menuName: string, clazz: Function) {
         name: menuName,
     }
 }
+
+ig.module('nax-ccuilib.ui.input-field').defines(() => {})
