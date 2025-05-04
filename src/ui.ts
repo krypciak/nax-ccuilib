@@ -1,34 +1,5 @@
-import './ui/test-menu'
 import './ui/input-field'
 import './ui/quick-menu/quick-menu-extension'
-
-// sc.TitleScreenButtonGui.inject({
-// 	init() {
-// 		this.parent();
-
-// 		// Get the last button that was instanced in the parent init, which is also the button with the highest Y position.
-// 		let highestButton = this.buttons[this.buttons.length - 1];
-
-// 		// @ts-ignore
-// 		this.myMenuButton = this._createButton(
-// 			"testMenu",
-// 			highestButton.hook.pos.y + highestButton.hook.size.y + 4, // Four for padding
-// 			6, // Or whatever is the highest unused index (Without any other mods it should be 6)
-// 			// @ts-ignore
-// 			this._enterTestMenu.bind(this),
-// 			"testMenu"
-// 		);
-
-// 		this.doStateTransition("DEFAULT", true);
-// 	},
-
-// 	// @ts-ignore
-// 	_enterTestMenu() {
-// 		// @ts-ignore
-// 		sc.menu.setDirectMode(true, sc.MENU_SUBMENU.TEST_MENU);
-// 		sc.model.enterMenu(true);
-// 	}
-// });
 
 nax.ccuilib.registerSubMenu = function (menuName: string, clazz: Function) {
     const enumString = menuName.toUpperCase()
@@ -41,5 +12,3 @@ nax.ccuilib.registerSubMenu = function (menuName: string, clazz: Function) {
         name: menuName,
     }
 }
-
-//nax.ccuilib.registerSubMenu("TEST_MENU", nax.ccuilib.TestMenu);
