@@ -26,7 +26,7 @@ To switch rings on gamepad, use L1 and R1.
 #### Building
 
 ```bash
-git clone https://github.com/conorlawton/nax-ccuilib
+git clone https://github.com/krypciak/nax-ccuilib
 cd nax-ccuilib
 pnpm run build
 ```
