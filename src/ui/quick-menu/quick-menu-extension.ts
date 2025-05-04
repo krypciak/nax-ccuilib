@@ -212,9 +212,6 @@ sc.QuickRingMenu.inject({
         button.ringId = id
     },
     createButtons(initAll: boolean = false) {
-        console.groupCollapsed('createButtons', initAll)
-        console.trace()
-        console.groupEnd()
         if (!initAll /* this is false only on the first call by the QuickRingMenu init() function */) {
             /* we only need to init the vanilla buttons */
             for (const widgetName of ['11_items', '11_analyze', '11_party', '11_map']) {
