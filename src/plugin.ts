@@ -22,6 +22,10 @@ export default class CCUILib implements PluginClass {
         window.nax.ccuilib ??= {}
 
         initQuickRingUtil()
+
+        /* prevent mw-rando crash when nax-module-cache is not enabled */
+        // @ts-expect-error
+        window.moduleCache ??= { _loadScript() {}, registerModPrefix() {} }
     }
 
     async prestart() {

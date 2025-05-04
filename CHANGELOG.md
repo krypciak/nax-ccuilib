@@ -3,6 +3,11 @@
 # Change Log
 
 ## [Unreleased]
+
+### Fixed
+
+- Fixed `CCMultiworldRandomizer` crash (sorry)
+
 ## [1.4.0] 2025-05-04
 
 ### Added
