@@ -1,3 +1,10 @@
-import "ultimate-crosscode-typedefs/modloader";
-import "ultimate-crosscode-typedefs/crosscode";
-import "./headers/**/*.d.ts";
+import 'ultimate-crosscode-typedefs/modloader'
+import 'ultimate-crosscode-typedefs/crosscode'
+import './headers/sc/quick-menu'
+import './headers/nax/input-field-cursor'
+import './headers/nax/input-field-type'
+import './headers/nax/input-field'
+import './headers/nax/nax-ui'
+import './headers/nax/quick-menu-public-api'
+import './headers/nax/quick-menu'
+import './headers/nax/test-menu'

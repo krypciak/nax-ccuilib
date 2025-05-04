@@ -1,14 +1,13 @@
 {
-	"id": "nax-ccuilib",
-	"version": "1.3.0",
-	"title": "CCUILib",
-	"description": "Library of additional UI elements as well as making existing ones configurable",
-	"repository": "https://github.com/krypciak/nax-ccuilib",
-	"tags": ["QoL", "library"],
-	"authors": ["nax", "krypek"],
-	"dependencies": {
-		"nax-module-cache": ">=1.0.0",
-		"ccmodmanager": ">=0.9.21"
-	},
-	"plugin": "nax-ccuilib/plugin.js"
+    "id": "nax-ccuilib",
+    "version": "1.3.0",
+    "title": "CCUILib",
+    "description": "Library of additional UI elements as well as making existing ones configurable",
+    "repository": "https://github.com/krypciak/nax-ccuilib",
+    "tags": ["QoL", "library"],
+    "authors": ["nax", "krypek"],
+    "dependencies": {
+        "ccmodmanager": ">=0.9.21"
+    },
+    "plugin": "plugin.js"
 }

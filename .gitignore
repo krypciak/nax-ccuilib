@@ -1,8 +1,8 @@
-node_modules
-dist
-*.code-workspace
-.vscode/
-build/
+plugin.js
+*.ccmod
 *.png~
-package-lock.json
-esbuild-post.js
+*.kra~
+*.kra
+node_modules
+pack
+bundle.zip

@@ -1,45 +1,45 @@
-ig.module("nax-ccuilib.ui")
-	.requires("nax-ccuilib.ui.test-menu", "nax-ccuilib.ui.input-field", "nax-ccuilib.ui.quick-menu.quick-menu-extension")
-	.defines(() => {
-		// sc.TitleScreenButtonGui.inject({
-		// 	init() {
-		// 		this.parent();
+import './ui/test-menu'
+import './ui/input-field'
+import './ui/quick-menu/quick-menu-extension'
 
-		// 		// Get the last button that was instanced in the parent init, which is also the button with the highest Y position.
-		// 		let highestButton = this.buttons[this.buttons.length - 1];
+// sc.TitleScreenButtonGui.inject({
+// 	init() {
+// 		this.parent();
 
-		// 		// @ts-ignore
-		// 		this.myMenuButton = this._createButton(
-		// 			"testMenu",
-		// 			highestButton.hook.pos.y + highestButton.hook.size.y + 4, // Four for padding
-		// 			6, // Or whatever is the highest unused index (Without any other mods it should be 6)
-		// 			// @ts-ignore
-		// 			this._enterTestMenu.bind(this),
-		// 			"testMenu"
-		// 		);
+// 		// Get the last button that was instanced in the parent init, which is also the button with the highest Y position.
+// 		let highestButton = this.buttons[this.buttons.length - 1];
 
-		// 		this.doStateTransition("DEFAULT", true);
-		// 	},
+// 		// @ts-ignore
+// 		this.myMenuButton = this._createButton(
+// 			"testMenu",
+// 			highestButton.hook.pos.y + highestButton.hook.size.y + 4, // Four for padding
+// 			6, // Or whatever is the highest unused index (Without any other mods it should be 6)
+// 			// @ts-ignore
+// 			this._enterTestMenu.bind(this),
+// 			"testMenu"
+// 		);
 
-		// 	// @ts-ignore
-		// 	_enterTestMenu() {
-		// 		// @ts-ignore
-		// 		sc.menu.setDirectMode(true, sc.MENU_SUBMENU.TEST_MENU);
-		// 		sc.model.enterMenu(true);
-		// 	}
-		// });
+// 		this.doStateTransition("DEFAULT", true);
+// 	},
 
-		nax.ccuilib.registerSubMenu = function (menuName: string, clazz: Function) {
-			const enumString = menuName.toUpperCase();
-			// @ts-ignore
-			sc.MENU_SUBMENU[enumString] = Math.max(...Object.values(sc.MENU_SUBMENU)) + 1;
+// 	// @ts-ignore
+// 	_enterTestMenu() {
+// 		// @ts-ignore
+// 		sc.menu.setDirectMode(true, sc.MENU_SUBMENU.TEST_MENU);
+// 		sc.model.enterMenu(true);
+// 	}
+// });
 
-			// @ts-ignore
-			sc.SUB_MENU_INFO[sc.MENU_SUBMENU[enumString]] = {
-				Clazz: clazz,
-				name: menuName,
-			};
-		};
+nax.ccuilib.registerSubMenu = function (menuName: string, clazz: Function) {
+    const enumString = menuName.toUpperCase()
+    // @ts-ignore
+    sc.MENU_SUBMENU[enumString] = Math.max(...Object.values(sc.MENU_SUBMENU)) + 1
 
-		//nax.ccuilib.registerSubMenu("TEST_MENU", nax.ccuilib.TestMenu);
-	});
+    // @ts-ignore
+    sc.SUB_MENU_INFO[sc.MENU_SUBMENU[enumString]] = {
+        Clazz: clazz,
+        name: menuName,
+    }
+}
+
+//nax.ccuilib.registerSubMenu("TEST_MENU", nax.ccuilib.TestMenu);
