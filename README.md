@@ -1,6 +1,6 @@
 <!-- markdownlint-disable MD013 MD024 MD001 MD045 -->
 
-# nax-ccuilib
+# CCUILib
 
 Aims to provide cross compatibility with multiple mods wanting to use the same UI space.
 
@@ -30,8 +30,6 @@ git clone https://github.com/krypciak/nax-ccuilib
 cd nax-ccuilib
 pnpm run build
 ```
-
-This should compiled into `dist` and zip the contents into a `.ccmod` in `build`.
 
 #### Adding your own widget
 

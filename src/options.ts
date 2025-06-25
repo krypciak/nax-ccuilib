@@ -1,14 +1,15 @@
 import type { Options } from 'ccmodmanager/types/mod-options'
 import CCUILib from './plugin'
+import { getIdFromRingPos } from './ui/quick-menu/quick-ring-util'
 
 export let Opts: ReturnType<typeof modmanager.registerAndGetModOptions<ReturnType<typeof registerOpts>>>
 
 export function registerOpts() {
     const defaultLayout: Record<number, string> = {
-        [nax.ccuilib.quickRingUtil.getIdFromRingPos(0, 0)]: '11_items',
-        [nax.ccuilib.quickRingUtil.getIdFromRingPos(0, 2)]: '11_analyze',
-        [nax.ccuilib.quickRingUtil.getIdFromRingPos(0, 4)]: '11_party',
-        [nax.ccuilib.quickRingUtil.getIdFromRingPos(0, 6)]: '11_map',
+        [getIdFromRingPos(0, 0)]: '11_items',
+        [getIdFromRingPos(0, 2)]: '11_analyze',
+        [getIdFromRingPos(0, 4)]: '11_party',
+        [getIdFromRingPos(0, 6)]: '11_map',
     }
     const opts = {
         general: {

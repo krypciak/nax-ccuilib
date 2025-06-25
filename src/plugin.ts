@@ -1,9 +1,11 @@
 import { PluginClass } from 'ultimate-crosscode-typedefs/modloader/mod'
 import { Mod1 } from 'ccmodmanager/types/types'
 import ccmod from '../ccmod.json'
-import type {} from './global.d.ts'
-import { registerOpts } from './options.js'
-import { initQuickRingUtil } from './ui/quick-menu/quick-menu-preload'
+import { registerOpts } from './options'
+import { inputFieldBackwardsCompatibility } from './ui/input-field-combatibility'
+import { injectQuickMenuExtension } from './ui/quick-menu/quick-menu-extension'
+import { pauseScreenApiPreload } from './ui/title-screen-api'
+import { setupQuickMenuPreload } from './ui/quick-menu/quick-menu-preload'
 
 export default class CCUILib implements PluginClass {
     static dir: string
@@ -21,15 +23,13 @@ export default class CCUILib implements PluginClass {
         // @ts-expect-error
         window.nax.ccuilib ??= {}
 
-        initQuickRingUtil()
-
-        /* prevent mw-rando crash when nax-module-cache is not enabled */
-        // @ts-expect-error
-        window.moduleCache ??= { _loadScript() {}, registerModPrefix() {} }
+        setupQuickMenuPreload()
+        pauseScreenApiPreload()
     }
 
-    async prestart() {
+    prestart() {
         registerOpts()
-        await import('./ui')
+        inputFieldBackwardsCompatibility()
+        injectQuickMenuExtension()
     }
 }

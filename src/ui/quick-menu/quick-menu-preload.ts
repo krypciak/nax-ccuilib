@@ -1,61 +1,45 @@
-import { Opts as OptsType } from '../../options'
+import { Opts } from '../../options'
+import * as quickRingUtil from './quick-ring-util'
 
-export function initQuickRingUtil() {
-    const self = {
-        getRingMaxSize(ring: number) {
-            return (ring + 1) * 8
-        },
+export function setupQuickMenuPreload() {
+    setupQuickRingUtil()
+    setupQuickRingMenuWidgets()
+    setupQuickMenuWidgetEvent()
+}
 
-        angleVec(angle: number): Vec2 {
-            angle = (angle + 180) % 360
-            return {
-                x: Math.sin((angle * Math.PI) / 180),
-                y: Math.cos((angle * Math.PI) / 180),
-            }
-        },
-
-        getIdFromRingPos(ring: number, index: number): number {
-            return ring * 1000 + index
-        },
-
-        getRingPosFromId(id: number) {
-            return { ring: Math.floor(id / 1000), index: id % 1000 }
-        },
-
-        getWidgetFromId(id: number) {
-            return nax.ccuilib.QuickRingMenuWidgets.widgets[self.ringConf[id]]
-        },
-
-        ringCountToInit: 3 as const,
-        selGridW: 4 as const,
-        possibleIds: [] as number[],
+type QuickRingUtilType = typeof quickRingUtil
+declare global {
+    namespace nax.ccuilib {
+        var quickRingUtil: QuickRingUtilType & {
+            ringConf: Record<number, string>
+        }
+    }
+}
+function setupQuickRingUtil() {
+    nax.ccuilib.quickRingUtil = Object.assign(quickRingUtil, {
         ringConf: {} as Record<number, string>,
+    })
 
-        getAllIdsFromRing(ring: number) {
-            const keys = Object.keys(self.ringConf)
-            const mapped = keys.map(Number)
-            const filtered = mapped.filter(id => self.getRingPosFromId(id).ring == ring)
-            return filtered
-        },
-        saveRingConfig(possibleSelGridIds: number[]) {
-            const save = { ...self.ringConf }
-            for (const id of Object.keys(save).map(Number)) {
-                const name = save[id]
-                if (name.startsWith('dummy')) delete save[id]
-            }
-            for (const id of possibleSelGridIds) delete save[id]
+    for (let ring = 0; ring < quickRingUtil.ringCountToInit; ring++) {
+        const maxSize = quickRingUtil.getRingMaxSize(ring)
+        for (let index = 0; index < maxSize; index++)
+            quickRingUtil.possibleIds.push(quickRingUtil.getIdFromRingPos(ring, index))
+    }
+}
 
-            const Opts = modmanager.options['nax-ccuilib'] as typeof OptsType
-            Opts.ringConfiguration = save
-        },
+declare global {
+    namespace nax.ccuilib {
+        interface QuickRingMenuWidgets extends sc.Model {
+            widgets: Record<string, nax.ccuilib.QuickMenuWidget>
+
+            addWidget(widget: nax.ccuilib.QuickMenuWidget): void
+            isWidgetToggledOn(widgetName: string): boolean
+        }
+        var QuickRingMenuWidgets: QuickRingMenuWidgets
     }
-    // @ts-expect-error
-    window.sc = {}
-    nax.ccuilib.quickRingUtil = self
-    for (let ring = 0; ring < self.ringCountToInit; ring++) {
-        const maxSize = self.getRingMaxSize(ring)
-        for (let index = 0; index < maxSize; index++) self.possibleIds.push(self.getIdFromRingPos(ring, index))
-    }
+}
+
+function setupQuickRingMenuWidgets() {
     nax.ccuilib.QuickRingMenuWidgets = {
         observers: [],
         widgets: {},
@@ -66,13 +50,20 @@ export function initQuickRingUtil() {
         },
 
         isWidgetToggledOn(widget: string) {
-            const Opts = modmanager.options['nax-ccuilib'] as typeof OptsType
             return Opts.buttonPressStatus[widget]
         },
     }
+}
+
+declare global {
+    namespace nax.ccuilib {
+        enum QUICK_MENU_WIDGET_EVENT {
+            CLICK = 0,
+        }
+    }
+}
+function setupQuickMenuWidgetEvent() {
     nax.ccuilib.QUICK_MENU_WIDGET_EVENT = {
         CLICK: 0,
     }
-
-    return self
 }
