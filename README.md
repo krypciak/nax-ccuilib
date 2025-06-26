@@ -60,6 +60,8 @@ As an example of a toggleable widget, see [cc-jetpack-widget](https://github.com
 
 ### Pause screen API
 
+![Screenshot of the pause screen with added button and text](https://github.com/user-attachments/assets/ae839baf-ac1d-4a0e-ac79-5ae9f6614047)
+
 #### Adding your own pause screen button
 
 ```ts
