@@ -72,14 +72,17 @@ nax.ccuilib.pauseScreen.addButton({
     onPress() {
         console.log('error: hug not found')
     },
-    showCondition() { /* optional, shown by default */
+    showCondition() {
+        /* optional, shown by default */
         return Math.random() > 0.5 /* 50% chance that the button is visible when opening the pause menu */
     },
-    enabledCondition() { /* optional, enabled by default */
+    enabledCondition() {
+        /* optional, enabled by default */
         return Math.random() > 0.5 /* 50% chance that the button is enabled when opening the pause menu */
     },
-    onShow(button) { /* optional */
-        button.setText('something dynamic') /* you can set what it says on the time of opening the pause menu */
+    onShow(button) {
+        /* optional */
+        button.setText('give hug x2') /* you can set what it says on the time of opening the pause menu */
     },
 })
 ```
@@ -91,11 +94,13 @@ import type {} from 'nax-ccuilib/src/ui/title-screen/title-screen-api'
 
 nax.ccuilib.pauseScreen.addText({
     text: 'my mod v1.0.0',
-    showCondition() { /* optional, shown by default */
+    showCondition() {
+        /* optional, shown by default */
         return Math.random() > 0.5 /* 50% chance that the text is visible when opening the pause menu */
     },
-    onShow(text) { /* optional */
-        text.setText('something dynamic') /* you can set what it says on the time of opening the pause menu */
+    onShow(text) {
+        /* optional */
+        text.setText('actually just checked: my mod v1.0.1') /* you can set what it says on the time of opening the pause menu */
     },
 })
 ```
