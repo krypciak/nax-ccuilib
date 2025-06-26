@@ -16,6 +16,7 @@ To switch rings on gamepad, use L1 and R1.
 
 - [cc-jetpack-widget](https://github.com/krypciak/cc-jetpack-widget) adds a jetpack widget  
 - [cc-character-widgets](https://github.com/krypciak/cc-character-widgets) adds character swapping widgets
+- [char-select](https://github.com/CCDirectLink/char-select) adds a character swapping menu widget
 - [cc-vim](https://github.com/krypciak/cc-vim) add some useful widgets for mod developers
 - [cc-speedrun-utilities](https://github.com/CCDirectLink/cc-speedrun-utilities) add speedrun related widgets
 - [cc-blitzkrieg](https://github.com/krypciak/cc-blitzkrieg) adds a puzzle skipping widget
@@ -34,7 +35,7 @@ pnpm run build
 #### Adding your own widget
 
 ```ts
-import type * as _ from 'nax-ccuilib/src/headers/nax/quick-menu-public-api.d.ts'
+import type {} from 'nax-ccuilib/src/ui/quick-menu/quick-menu-extension'
 
 /* check if the mod is installed */
 if (window.nax?.ccuilib?.QuickRingMenuWidgets) {
@@ -56,3 +57,44 @@ if (window.nax?.ccuilib?.QuickRingMenuWidgets) {
 ```
 
 As an example of a toggleable widget, see [cc-jetpack-widget](https://github.com/krypciak/cc-jetpack-widget/blob/main/src/plugin.ts)
+
+### Pause screen API
+
+#### Adding your own pause screen button
+
+```ts
+import type {} from 'nax-ccuilib/src/ui/title-screen/title-screen-api'
+
+nax.ccuilib.pauseScreen.addButton({
+    text: 'give a hug',
+    onPress() {
+        console.log('error: hug not found')
+    },
+    showCondition() { /* optional, shown by default */
+        return Math.random() > 0.5 /* 50% chance that the button is visible when opening the pause menu */
+    },
+    enabledCondition() { /* optional, enabled by default */
+        return Math.random() > 0.5 /* 50% chance that the button is enabled when opening the pause menu */
+    },
+    onShow(button) { /* optional */
+        button.setText('something dynamic') /* you can set what it says on the time of opening the pause menu */
+    },
+})
+```
+
+#### Adding your own pause screen text
+
+```ts
+import type {} from 'nax-ccuilib/src/ui/title-screen/title-screen-api'
+
+nax.ccuilib.pauseScreen.addText({
+    text: 'my mod v1.0.0',
+    showCondition() { /* optional, shown by default */
+        return Math.random() > 0.5 /* 50% chance that the text is visible when opening the pause menu */
+    },
+    onShow(text) { /* optional */
+        text.setText('something dynamic') /* you can set what it says on the time of opening the pause menu */
+    },
+})
+```
+
