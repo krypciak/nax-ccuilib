@@ -6,6 +6,7 @@
 ## [1.5.0] 2025-06-26
 
 - Add pause screen api
+- Move `nax.ccuilib.InputField` to `ccmodmanager` (`nax.ccuilib.InputField` is linked to `modmanager.gui.InputField` for backwards compatibility)
 
 ## [1.4.1] 2025-05-04
 
