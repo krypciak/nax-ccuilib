@@ -8,9 +8,7 @@ Aims to provide cross compatibility with multiple mods wanting to use the same U
 
 https://github.com/krypciak/nax-ccuilib/assets/115574014/45e3745f-399a-41a3-93b9-751260c63129
 
-The action button is right click or press X on gamepad.  
-To enter edit mode, press the action button.  
-To switch rings on gamepad, use L1 and R1.
+Usage guide: https://www.youtube.com/watch?v=ChUcRaIHJUk
 
 ### Mods that add more widgets
 
