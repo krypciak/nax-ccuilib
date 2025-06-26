@@ -10,11 +10,17 @@ declare global {
         }
     }
 }
-export interface PauseScreenTextConfig {
-    text: string
+export type PauseScreenTextConfig = {
     onShow?: (text: nax.ccuilib.pauseScreen.PauseScreenText) => void
     showCondition?: () => boolean
-}
+} & (
+    | {
+          text: string
+      }
+    | {
+          textGui: () => sc.TextGui
+      }
+)
 
 export function injectTitleScreenText() {
     sc.PauseScreenGui.inject({
@@ -22,9 +28,13 @@ export function injectTitleScreenText() {
             this.parent()
             this.extraTexts = []
             for (const config of nax.ccuilib.pauseScreen.textConfigs) {
-                const text = new sc.TextGui(config.text, {
-                    font: sc.fontsystem.tinyFont,
-                }) as nax.ccuilib.pauseScreen.PauseScreenText
+                const text = (
+                    'textGui' in config
+                        ? config.textGui()
+                        : new sc.TextGui(config.text, {
+                              font: sc.fontsystem.tinyFont,
+                          })
+                ) as nax.ccuilib.pauseScreen.PauseScreenText
                 text.setAlign(this.versionGui.hook.align.x, this.versionGui.hook.align.y)
                 this.addChildGui(text)
                 text.hook.transitions['HIDDEN'] = { state: { alpha: 0 }, time: 0, timeFunction: KEY_SPLINES.LINEAR }

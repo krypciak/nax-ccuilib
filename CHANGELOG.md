@@ -3,9 +3,19 @@
 # Change Log
 
 ## [Unreleased]
+
+### Added
+
+- Add option to pass your own `sc.TextGui` to `nax.ccuilib.pauseScreen.addText`
+
 ## [1.5.0] 2025-06-26
 
+### Added
+
 - Add pause screen api
+
+### Changed 
+
 - Move `nax.ccuilib.InputField` to `ccmodmanager` (`nax.ccuilib.InputField` is linked to `modmanager.gui.InputField` for backwards compatibility)
 
 ## [1.4.1] 2025-05-04
