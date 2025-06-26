@@ -4,7 +4,7 @@ import ccmod from '../ccmod.json'
 import { registerOpts } from './options'
 import { inputFieldBackwardsCompatibility } from './ui/input-field-combatibility'
 import { injectQuickMenuExtension } from './ui/quick-menu/quick-menu-extension'
-import { pauseScreenApiPreload, pauseScreenApiPrestart } from './ui/title-screen/title-screen-api'
+import { pauseScreenApiPreload, pauseScreenApiPrestart } from './ui/pause-screen/pause-screen-api'
 import { setupQuickMenuPreload } from './ui/quick-menu/quick-menu-preload'
 
 export default class CCUILib implements PluginClass {
