@@ -3,6 +3,15 @@
 # Change Log
 
 ## [Unreleased]
+
+### Added
+
+- Added `enabled` option to widget API
+
+### Fixed
+
+- Fixed default buttons being enabled most of the time (for example the map button was not disabled during combat)
+
 ## [1.5.1] 2025-07-22
 
 ### Added

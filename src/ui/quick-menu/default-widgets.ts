@@ -20,6 +20,7 @@ export function setupQuickMenuDefaultWidgets() {
             button.addChildGui(new sc.ItemTimerOverlay(button))
         },
         imageNoCache: true,
+        enabled: () => !(sc.pvp.isActive() || sc.model.player.itemBlockTimer > 0 || sc.quickmodel.itemsBlocked),
     })
     nax.ccuilib.QuickRingMenuWidgets.addWidget({
         key: '11_analyze',
@@ -44,6 +45,7 @@ export function setupQuickMenuDefaultWidgets() {
             sc.QuickRingMenu.instance.party = button
         },
         imageNoCache: true,
+        enabled: () => !((!sc.model.isSaveAllowed() || sc.model.isTeleportBlocked()) && !sc.autoControl.isActive()),
     })
     nax.ccuilib.QuickRingMenuWidgets.addWidget({
         key: '11_map',
@@ -56,5 +58,6 @@ export function setupQuickMenuDefaultWidgets() {
             sc.QuickRingMenu.instance.map = button
         },
         imageNoCache: true,
+        enabled: () => !((!sc.model.isSaveAllowed() || sc.model.isTeleportBlocked()) && !sc.autoControl.isActive()),
     })
 }

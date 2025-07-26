@@ -50,6 +50,7 @@ if (window.nax?.ccuilib?.QuickRingMenuWidgets) {
             pos: { x: 11, y: 10 },
             size: { x: 12, y: 12 },
         }),
+        enabled: () => sc.model.isCombatActive() /* only enable the button when combat is active */
     })
 }
 ```

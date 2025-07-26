@@ -39,6 +39,7 @@ declare global {
             createButton(this: this, widget: nax.ccuilib.QuickMenuWidget): sc.RingMenuButton
             createButtons(this: this, initAll?: boolean): void
             setButtonId(this: this, button: sc.RingMenuButton, id: number): void
+            updateButtonEnabledStatus(this: this): void
             enterEditMode(this: this): void
             exitEditMode(this: this): void
             showDummyButtons(this: this): void
@@ -215,6 +216,7 @@ function injectQuickRingMenu() {
                                     nax.ccuilib.quickRingUtil.ringConf[toB.ringId] = fromWidget
                                 }
                             }
+                            this.updateButtonEnabledStatus()
 
                             saveRingConfig(this.possibleSelGridIds)
 
@@ -247,12 +249,19 @@ function injectQuickRingMenu() {
             button.setPos(button.endPos.x, button.endPos.y)
             button.ringId = id
         },
+        updateButtonEnabledStatus() {
+            for (const button of this.buttons) {
+                const widget = getWidgetFromId(button.ringId)
+                button.setActive(widget.enabled === undefined || widget.enabled())
+            }
+        },
         createButtons(initAll: boolean = false) {
             if (!initAll /* this is false only on the first call by the QuickRingMenu init() function */) {
                 /* we only need to init the vanilla buttons */
                 for (const widgetName of ['11_items', '11_analyze', '11_party', '11_map']) {
                     this.createButton(nax.ccuilib.QuickRingMenuWidgets.widgets[widgetName])
                 }
+                this.updateButtonEnabledStatus()
                 return
             }
             if (this.buttons) for (const button of this.buttons) this.removeChildGui(button)
@@ -285,6 +294,8 @@ function injectQuickRingMenu() {
                 })
 
             this.buttongroup.setButtons(...this.buttons)
+
+            this.updateButtonEnabledStatus()
         },
         _createRingButton() {
             throw new Error('CCUILib: This way of creating quick menu buttons is not supported.')
@@ -308,6 +319,7 @@ function injectQuickRingMenu() {
                         name: `dummy${id}`,
                         title: `Replacement button ${id}`,
                         description: '',
+                        enabled: () => false,
                     })
                 }
                 this.dummyButtonsCreated = true
@@ -365,10 +377,12 @@ declare global {
             key?: string /* if unsed, it's set to variable: name */
             name: string
             title: string
-            pressEvent?: (button: sc.RingMenuButton) => void
             keepPressed?: boolean
             description?: string
             toggle?: boolean
+
+            pressEvent?: (button: sc.RingMenuButton) => void
+            enabled?: () => boolean
 
             id?: sc.QUICK_MENU_STATE
             additionalInit?: (button: sc.RingMenuButton) => void
