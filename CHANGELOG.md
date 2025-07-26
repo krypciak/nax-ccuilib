@@ -11,6 +11,7 @@
 ### Fixed
 
 - Fixed default buttons being enabled most of the time (for example the map button was not disabled during combat)
+- Fix quick menu keyboard button navigation with wasd attempting to focus hidden buttons
 
 ## [1.5.1] 2025-07-22
 

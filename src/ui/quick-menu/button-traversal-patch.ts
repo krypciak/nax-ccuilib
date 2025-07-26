@@ -9,7 +9,7 @@ declare global {
 
             setButtons(this: this, ...buttons: sc.RingMenuButton[]): void
             doButtonTraversal(this: this, focusRegained?: boolean, dirOverride?: Vec2): void
-            focusButtonByRingId(this: this, ringId: number): void
+            focusButtonByRingId(this: this, ringId: number): boolean
             getRepeaterDir(this: this, dirVec: Vec2): string | undefined
             getRepeaterValue(this: this, dirVec: Vec2): string | null
             getRingIdFromDir(this: this, dir: string, id: number): number
@@ -27,13 +27,16 @@ export function injectQuickMenuButtonTraversalPatch() {
             args.forEach((btn, i) => btn && this.addFocusGui(btn as ig.FocusGui, 0, i))
         },
         focusButtonByRingId(ringId) {
+            if (!nax.ccuilib.quickRingUtil.ringConf[ringId]) return false
+
             for (let i = 0; i < this.elements[0].length; i++) {
                 const button = this.elements[0][i]
                 if (button?.ringId == ringId) {
                     this.focusCurrentButton(0, i)
-                    break
+                    return true
                 }
             }
+            return false
         },
         getRepeaterDir(dirVec) {
             if (dirVec.x > 0.7) return 'e'
@@ -115,8 +118,7 @@ export function injectQuickMenuButtonTraversalPatch() {
                         { cond: () => sc.control.rightDown(), id: 6 },
                     ]
                     for (const dir of dirs) {
-                        if (dir.cond()) {
-                            this.focusButtonByRingId(dir.id)
+                        if (dir.cond() && this.focusButtonByRingId(dir.id)) {
                             break
                         }
                     }
