@@ -2,6 +2,8 @@
 
 # CCUILib
 
+[![CCModManager badge](https://raw.githubusercontent.com/CCDirectLink/CCModManager/refs/heads/master/icon/badge.png)](https://github.com/CCDirectLink/CCModManager)
+
 Aims to provide cross compatibility with multiple mods wanting to use the same UI space.
 
 ## Quick menu extension
