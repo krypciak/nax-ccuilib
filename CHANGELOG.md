@@ -3,6 +3,11 @@
 # Change Log
 
 ## [Unreleased]
+
+### Fixed
+
+- Fix default widgets being enabled when they shouldn't be (again, sorry)
+
 ## [1.5.2] 2025-07-26
 
 ### Added

@@ -130,6 +130,8 @@ function injectQuickRingMenu() {
             if (!this.openendAtLeastOnce) {
                 this.createButtons(true)
                 this.openendAtLeastOnce = true
+            } else {
+                this.updateButtonEnabledStatus()
             }
             this.parent()
 
@@ -261,39 +263,38 @@ function injectQuickRingMenu() {
                 for (const widgetName of ['11_items', '11_analyze', '11_party', '11_map']) {
                     this.createButton(nax.ccuilib.QuickRingMenuWidgets.widgets[widgetName])
                 }
-                this.updateButtonEnabledStatus()
-                return
-            }
-            if (this.buttons) for (const button of this.buttons) this.removeChildGui(button)
-            for (let i = 0; i < this.buttongroup.elements[0].length; i++) this.buttongroup.removeFocusGui(0, i)
+            } else {
+                if (this.buttons) for (const button of this.buttons) this.removeChildGui(button)
+                for (let i = 0; i < this.buttongroup.elements[0].length; i++) this.buttongroup.removeFocusGui(0, i)
 
-            this.buttons = possibleIds
-                .concat(this.editModeOn ? this.possibleSelGridIds : [])
-                .map(id => ({
-                    id,
-                    widgetName: nax.ccuilib.quickRingUtil.ringConf[id],
-                }))
-                .filter(o => o.widgetName)
-                .map(o =>
-                    Object.assign(o, {
-                        widget: nax.ccuilib.QuickRingMenuWidgets.widgets[o.widgetName],
+                this.buttons = possibleIds
+                    .concat(this.editModeOn ? this.possibleSelGridIds : [])
+                    .map(id => ({
+                        id,
+                        widgetName: nax.ccuilib.quickRingUtil.ringConf[id],
+                    }))
+                    .filter(o => o.widgetName)
+                    .map(o =>
+                        Object.assign(o, {
+                            widget: nax.ccuilib.QuickRingMenuWidgets.widgets[o.widgetName],
+                        })
+                    )
+                    .filter(o => {
+                        if (!o.widget) {
+                            delete nax.ccuilib.quickRingUtil.ringConf[o.id]
+                            return false
+                        }
+                        return true
                     })
-                )
-                .filter(o => {
-                    if (!o.widget) {
-                        delete nax.ccuilib.quickRingUtil.ringConf[o.id]
-                        return false
-                    }
-                    return true
-                })
-                .map(({ id, widget }) => {
-                    const button = this.createButton(widget)
-                    this.setButtonId(button, id)
-                    this.addChildGui(button)
-                    return button
-                })
+                    .map(({ id, widget }) => {
+                        const button = this.createButton(widget)
+                        this.setButtonId(button, id)
+                        this.addChildGui(button)
+                        return button
+                    })
 
-            this.buttongroup.setButtons(...this.buttons)
+                this.buttongroup.setButtons(...this.buttons)
+            }
 
             this.updateButtonEnabledStatus()
         },
