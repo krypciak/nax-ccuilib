@@ -254,6 +254,7 @@ function injectQuickRingMenu() {
         updateButtonEnabledStatus() {
             for (const button of this.buttons) {
                 const widget = getWidgetFromId(button.ringId)
+                if (!widget) continue
                 button.setActive(widget.enabled === undefined || widget.enabled())
             }
         },
@@ -405,7 +406,7 @@ function injectRingMenuButton() {
         },
         isToggleOn() {
             return (this.toggledCache ??= nax.ccuilib.QuickRingMenuWidgets.isWidgetToggledOn(
-                getWidgetFromId(this.ringId).name
+                getWidgetFromId(this.ringId)?.name ?? ''
             ))
         },
         invokeButtonPress() {

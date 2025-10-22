@@ -20,7 +20,7 @@ export function getRingPosFromId(id: number) {
     return { ring: Math.floor(id / 1000), index: id % 1000 }
 }
 
-export function getWidgetFromId(id: number) {
+export function getWidgetFromId(id: number): nax.ccuilib.QuickMenuWidget | undefined {
     return nax.ccuilib.QuickRingMenuWidgets.widgets[nax.ccuilib.quickRingUtil.ringConf[id]]
 }
 

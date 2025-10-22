@@ -3,6 +3,11 @@
 # Change Log
 
 ## [Unreleased]
+
+### Fixed 
+
+- Fix game crashing sometimes when opening the quick menu
+
 ## [1.5.3] 2025-10-18
 
 ### Fixed
