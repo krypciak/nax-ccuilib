@@ -3,6 +3,11 @@
 # Change Log
 
 ## [Unreleased]
+
+### Fixed
+
+- Fix memory leak with cc-instanceinator
+
 ## [1.5.4] 2025-10-22
 
 ### Fixed 

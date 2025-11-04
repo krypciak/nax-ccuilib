@@ -34,6 +34,8 @@ declare global {
             editModeOn: boolean
             openendAtLeastOnce: boolean
             infoBar: sc.InfoBar
+            focusedButton: sc.RingMenuButton | undefined
+            lastFocusedButton: sc.RingMenuButton | undefined
 
             onWidgetListUpdate(this: this): void
             createButton(this: this, widget: nax.ccuilib.QuickMenuWidget): sc.RingMenuButton
@@ -52,9 +54,6 @@ declare global {
         }
     }
 }
-
-let focusedButton: sc.RingMenuButton | undefined
-let lastFocusedButton: sc.RingMenuButton | undefined
 
 function injectQuickRingMenu() {
     sc.QuickRingMenu.inject({
@@ -191,7 +190,7 @@ function injectQuickRingMenu() {
                 ) {
                     if (!this.selectedToMoveButton) {
                         if (this.editModeOn) {
-                            this.selectedToMoveButton = focusedButton
+                            this.selectedToMoveButton = this.focusedButton
                             sc.BUTTON_SOUND.toggle_on.play()
                         } else {
                             sc.BUTTON_SOUND.submit.play()
@@ -199,7 +198,7 @@ function injectQuickRingMenu() {
                         this.enterEditMode()
                     } else {
                         const fromB = this.selectedToMoveButton
-                        const toB = focusedButton
+                        const toB = this.focusedButton
                         if (toB) {
                             let fromWidget: string = nax.ccuilib.quickRingUtil.ringConf[fromB.ringId]
                             let toWidget: string = nax.ccuilib.quickRingUtil.ringConf[toB.ringId]
@@ -346,11 +345,11 @@ function injectQuickRingMenu() {
         _setStateActive(state) {
             if (state == sc.QUICK_MENU_STATE.NONE) {
                 this.buttons.forEach(b => b.show(0, true))
-                if (sc.quickmodel.isQuickNone() && !ig.input.mouseGuiActive) lastFocusedButton?.focusGained()
+                if (sc.quickmodel.isQuickNone() && !ig.input.mouseGuiActive) this.lastFocusedButton?.focusGained()
                 return
             }
             this.buttons.forEach(b => b.deactivate())
-            lastFocusedButton?.activate()
+            this.lastFocusedButton?.activate()
         },
     })
 }
@@ -429,8 +428,8 @@ function injectRingMenuButton() {
         },
         focusGained() {
             this.parent()
-            focusedButton = this
-            lastFocusedButton = this
+            sc.QuickRingMenu.instance.focusedButton = this
+            sc.QuickRingMenu.instance.lastFocusedButton = this
             const widget = getWidgetFromId(this.ringId)
             if (!widget) return
             sc.QuickRingMenu.instance.infoBar.setText(
@@ -439,7 +438,7 @@ function injectRingMenuButton() {
         },
         focusLost() {
             this.parent()
-            focusedButton = undefined
+            sc.QuickRingMenu.instance.focusedButton = undefined
             sc.QuickRingMenu.instance.infoBar.setText('')
         },
         canPlayFocusSounds() {
