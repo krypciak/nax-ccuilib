@@ -1,5 +1,5 @@
-import { injectTitleScreenText, PauseScreenTextConfig } from './text'
-import { injectTitleScreenButton, PauseScreenButtonConfig } from './button'
+import { injectTitleScreenText, type PauseScreenTextConfig } from './text'
+import { injectTitleScreenButton, type PauseScreenButtonConfig } from './button'
 
 declare global {
     namespace nax.ccuilib.pauseScreen {
