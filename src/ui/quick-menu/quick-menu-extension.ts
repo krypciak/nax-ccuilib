@@ -36,6 +36,7 @@ declare global {
             infoBar: sc.InfoBar
             focusedButton: sc.RingMenuButton | undefined
             lastFocusedButton: sc.RingMenuButton | undefined
+            lastQuickModelState?: sc.QUICK_MENU_STATE
 
             onWidgetListUpdate(this: this): void
             createButton(this: this, widget: nax.ccuilib.QuickMenuWidget): sc.RingMenuButton
@@ -162,6 +163,9 @@ function injectQuickRingMenu() {
             return originalIndex != this.currentRingIndex
         },
         update() {
+            const lastQuickModelState = this.lastQuickModelState
+            this.lastQuickModelState = sc.quickmodel.currentState
+
             this.parent()
             const lastI = ig.interact.entries.last()
             if (
@@ -186,7 +190,8 @@ function injectQuickRingMenu() {
                     !Opts.lockLayout &&
                     (isGamepad
                         ? ig.gamepad.isButtonPressed(ig.BUTTONS.FACE2 /* x */)
-                        : ig.input.pressed('dash')) /* right click */
+                        : ig.input.pressed('dash')) /* right click */ &&
+                    lastQuickModelState != sc.QUICK_MENU_STATE.CHECK
                 ) {
                     if (!this.selectedToMoveButton) {
                         if (this.editModeOn) {
