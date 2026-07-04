@@ -15,12 +15,12 @@
         "esbuild": "^0.28.1",
         "fflate": "^0.8.3",
         "prettier": "3.9.4",
-        "typescript": "^6.0.3"
+        "typescript": "^6.0.3",
+        "ultimate-crosscode-typedefs": "github:krypciak/ultimate-crosscode-typedefs",
+        "ccmodmanager": "github:CCDirectLink/CCModManager"
     },
     "dependencies": {
         "@types/jquery": "=1.10.x",
-        "@types/node": "^26.1.0",
-        "ultimate-crosscode-typedefs": "github:krypciak/ultimate-crosscode-typedefs",
-        "ccmodmanager": "github:CCDirectLink/CCModManager"
+        "@types/node": "^26.1.0"
     }
 }
