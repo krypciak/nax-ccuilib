@@ -1,4 +1,3 @@
-
 declare global {
     namespace sc {
         interface PauseScreenGui {
