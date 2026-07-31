@@ -3,6 +3,11 @@
 # Change Log
 
 ## [Unreleased]
+
+### Added
+
+- Add crosscode version requirement
+
 ## [1.5.6] 2026-05-14
 
 ### Fixed
