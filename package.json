@@ -1,6 +1,6 @@
 {
     "name": "nax-ccuilib",
-    "version": "1.5.6",
+    "version": "1.5.7",
     "type": "module",
     "scripts": {
         "start": "esbuild --target=es2018 --format=esm --platform=node --bundle --sourcemap=inline --outfile=plugin.js src/plugin.ts",
