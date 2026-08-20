@@ -104,7 +104,6 @@ function injectQuickRingMenu() {
             const selGridPos: Vec2 = { x: 207, y: -80 }
             this.possibleSelGridIds = Object.keys(nax.ccuilib.QuickRingMenuWidgets.widgets)
                 .filter(name => !name.startsWith('dummy'))
-                .sort()
                 .map((name, i) => {
                     const id = getIdFromRingPos(ringCountToInit, i)
                     nax.ccuilib.quickRingUtil.ringConf[id] = name

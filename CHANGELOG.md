@@ -3,6 +3,11 @@
 # Change Log
 
 ## [Unreleased]
+
+### Changed
+
+- Don't sort widget list to preserve add order
+
 ## [1.5.7] 2026-08-01
 
 ### Added
