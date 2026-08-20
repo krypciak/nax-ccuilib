@@ -17,6 +17,7 @@ import {
 } from './quick-ring-util'
 
 export function injectQuickMenuExtension() {
+    setRingConfigFunctions()
     injectQuickRingMenu()
     injectRingMenuButton()
     setupQuickMenuDefaultWidgets()
@@ -62,7 +63,7 @@ function injectQuickRingMenu() {
             sc.QuickRingMenu.instance = this
             this.openendAtLeastOnce = false
 
-            nax.ccuilib.quickRingUtil.ringConf = Opts.ringConfiguration
+            nax.ccuilib.quickRingUtil.ringConf = nax.ccuilib.loadRingConfigData()
 
             this.currentRingIndex = -1
             this.nextRing(1)
@@ -119,7 +120,7 @@ function injectQuickRingMenu() {
                 })
         },
         enter() {
-            nax.ccuilib.quickRingUtil.ringConf = Opts.ringConfiguration
+            nax.ccuilib.quickRingUtil.ringConf = nax.ccuilib.loadRingConfigData()
 
             this.selectedToMoveButton = undefined
             this.exitEditMode()
@@ -224,7 +225,7 @@ function injectQuickRingMenu() {
                             }
                             this.updateButtonEnabledStatus()
 
-                            saveRingConfig(this.possibleSelGridIds)
+                            saveRingConfig()
 
                             this.selectedToMoveButton = undefined
                             sc.BUTTON_SOUND.toggle_off.play()
@@ -365,7 +366,6 @@ declare global {
             title: string
             ringId: number
             isAToggle?: boolean
-            toggledCache?: boolean
 
             getLocalStorageToggleId(this: this): string
             isToggleOn(this: this): boolean
@@ -409,9 +409,10 @@ function injectRingMenuButton() {
             this.parent(state, endPosX, endPosY)
         },
         isToggleOn() {
-            return (this.toggledCache ??= nax.ccuilib.QuickRingMenuWidgets.isWidgetToggledOn(
-                getWidgetFromId(this.ringId)?.name ?? ''
-            ))
+            return (
+                !!this.isAToggle &&
+                nax.ccuilib.QuickRingMenuWidgets.isWidgetToggledOn(getWidgetFromId(this.ringId)?.name ?? '')
+            )
         },
         invokeButtonPress() {
             const widget = getWidgetFromId(this.ringId)
@@ -422,11 +423,8 @@ function injectRingMenuButton() {
             ig.FocusGui.prototype.invokeButtonPress.call(this)
             if (this.isAToggle) {
                 const newConf = { ...Opts.buttonPressStatus }
-                newConf[widget.name] = this.toggledCache = !this.isToggleOn()
+                newConf[widget.name] = !this.isToggleOn()
                 Opts.buttonPressStatus = newConf
-
-                /* Reset all toggle cache on all buttons to prevent multiple of the same button cache states desyncing */
-                for (const button of sc.QuickRingMenu.instance.buttons) button.toggledCache = undefined
 
                 sc.BUTTON_SOUND[this.isToggleOn() ? 'toggle_on' : 'toggle_off'].play()
             } else sc.BUTTON_SOUND.submit.play()
@@ -476,4 +474,20 @@ function injectRingMenuButton() {
             renderer.addGfx(data.gfx, pos.x, pos.y, srcPos.x, srcPos.y, size.x, size.y)
         },
     })
+}
+
+declare global {
+    namespace nax.ccuilib {
+        function saveRingConfigData(save: Record<number, string>): void
+        function loadRingConfigData(): Record<number, string>
+    }
+}
+
+function setRingConfigFunctions() {
+    nax.ccuilib.saveRingConfigData = save => {
+        Opts.ringConfiguration = save
+    }
+    nax.ccuilib.loadRingConfigData = () => {
+        return Opts.ringConfiguration
+    }
 }

@@ -28,7 +28,7 @@ export function registerOpts() {
                     resetButton: {
                         type: 'BUTTON',
                         onPress() {
-                            Opts.ringConfiguration = defaultLayout
+                            nax.ccuilib.saveRingConfigData(defaultLayout)
                         },
                         name: 'Reset the default layout',
                         description: 'Restore the quick menu layout to the default one.',

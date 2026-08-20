@@ -1,5 +1,3 @@
-import { Opts } from '../../options'
-
 export function getRingMaxSize(ring: number) {
     return (ring + 1) * 8
 }
@@ -34,13 +32,17 @@ export function getAllIdsFromRing(ring: number) {
     const filtered = mapped.filter(id => getRingPosFromId(id).ring == ring)
     return filtered
 }
-export function saveRingConfig(possibleSelGridIds: number[]) {
-    const save = { ...nax.ccuilib.quickRingUtil.ringConf }
+
+export function sanitizeRingConfig(save: Record<number, string>) {
+    const lastRingId = getIdFromRingPos(ringCountToInit, 0)
     for (const id of Object.keys(save).map(Number)) {
         const name = save[id]
-        if (name.startsWith('dummy')) delete save[id]
+        if (id >= lastRingId || name.startsWith('dummy')) delete save[id]
     }
-    for (const id of possibleSelGridIds) delete save[id]
+}
+export function saveRingConfig() {
+    const save = { ...nax.ccuilib.quickRingUtil.ringConf }
+    sanitizeRingConfig(save)
 
-    Opts.ringConfiguration = save
+    nax.ccuilib.saveRingConfigData(save)
 }
