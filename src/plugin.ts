@@ -1,23 +1,15 @@
 import type { PluginClass } from 'ultimate-crosscode-typedefs/modloader/mod'
-import type {} from 'ultimate-crosscode-typedefs'
-import type { Mod1 } from 'ccmodmanager/types/types'
-import ccmod from '../ccmod.json'
+import type { Mod1 } from './types'
 import { registerOpts } from './options'
 import { inputFieldBackwardsCompatibility } from './ui/input-field-combatibility'
 import { injectQuickMenuExtension } from './ui/quick-menu/quick-menu-extension'
 import { pauseScreenApiPreload, pauseScreenApiPrestart } from './ui/pause-screen/pause-screen-api'
 import { setupQuickMenuPreload } from './ui/quick-menu/quick-menu-preload'
+import { setModMetadata } from './mod-metadata'
 
 export default class CCUILib implements PluginClass {
-    static dir: string
-    static mod: Mod1
-    static manifset: typeof import('../ccmod.json') = ccmod
-
     constructor(mod: Mod1) {
-        CCUILib.dir = mod.baseDirectory
-        CCUILib.mod = mod
-        CCUILib.mod.isCCL3 = mod.findAllAssets ? true : false
-        CCUILib.mod.isCCModPacked = mod.baseDirectory.endsWith('.ccmod/')
+        setModMetadata(mod)
 
         // @ts-expect-error
         window.nax ??= {}

@@ -1,6 +1,6 @@
 import type { Options } from 'ccmodmanager/types/mod-options'
-import CCUILib from './plugin'
 import { getIdFromRingPos } from './ui/quick-menu/quick-ring-util'
+import { modMetadata } from './mod-metadata'
 
 export let Opts: ReturnType<typeof modmanager.registerAndGetModOptions<ReturnType<typeof registerOpts>>>
 
@@ -49,10 +49,10 @@ export function registerOpts() {
 
     Opts = modmanager.registerAndGetModOptions(
         {
-            modId: CCUILib.manifset.id,
-            title: CCUILib.manifset.title,
+            modId: modMetadata.manifest.id,
+            title: modMetadata.manifest.title,
             helpMenu: {
-                title: CCUILib.manifset.title,
+                title: modMetadata.manifest.title,
                 pages: [
                     {
                         title: '\\c[3]CCUILib\\c[0]: Quick menu extension\n',
